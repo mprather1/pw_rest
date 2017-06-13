@@ -4,7 +4,7 @@ import {Server} from 'http'
 import helmet from 'helmet'
 import winston from 'winston-color'
 import chalk from 'chalk'
-// import getRouter from './routes'
+import getRouter from './routes'
 import config from './_config'
 import pkg from '../package.json'
 
@@ -20,14 +20,21 @@ const options = {
 
 const { app, port, logger, packageVersion, packageName } = options
 
-const server = Server(app)
+app.use(helmet())
 
-app.use(helmet)
+const server = Server(app)
+const router = getRouter(options)
+
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+app.use('/api', router)
 
 server.on('listening', () => {
   logger.info(`${chalk.bgBlack.cyan(packageName)} ver.${chalk.bgBlack.green(packageVersion)} istening on port ${chalk.bgBlack.yellow(port)}...`)
+})
+
+server.on('request', (req, res) => {
+  logger.info(req.method, req.url)
 })
 
 server.on('error', (err) => {
@@ -35,3 +42,5 @@ server.on('error', (err) => {
 })
 
 server.listen(port)
+
+export default server
