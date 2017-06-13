@@ -10,5 +10,10 @@ export default function getRouter (options) {
     .get(models(options).getAllModels)
     .post(models(options).createModel)
 
+  router.route('/models/:id')
+    .get(models(options).getSingleModel)
+    .put(models(options).updateSingleModel)
+    .delete(models(options).removeModel)
+
   return router
 }
