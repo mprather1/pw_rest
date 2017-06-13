@@ -7,6 +7,7 @@ import chalk from 'chalk'
 import getRouter from './routes'
 import config from './_config'
 import pkg from '../package.json'
+import {init as db} from './queries'
 
 const options = {
   app: express(),
@@ -17,6 +18,8 @@ const options = {
   packageName: pkg.name,
   packageVersion: pkg.version
 }
+
+options.db = db(options)
 
 const { app, port, logger, packageVersion, packageName } = options
 

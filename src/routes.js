@@ -8,6 +8,7 @@ export default function getRouter (options) {
 
   router.route('/models')
     .get(models(options).getAllModels)
+    .post(models(options).createModel)
 
   return router
 }
