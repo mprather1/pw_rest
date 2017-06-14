@@ -4,11 +4,11 @@ import serverConfig from '../server'
 
 chai.use(chaiHttp)
 
-const server = serverConfig.server
-const db = serverConfig.options.db
-const logger = serverConfig.options.logger
+var server = serverConfig.server
+var db = serverConfig.options.db
+var logger = serverConfig.options.logger
 
-const expect = chai.expect
+var expect = chai.expect
 
 describe('models', function () {
   before(function (done) {
@@ -38,7 +38,7 @@ describe('models', function () {
     chai.request(server)
     .get('/api/models')
     .end(function (err, res) {
-      const body = res.body.body[0]
+      var body = res.body.body[0]
 
       expect(err).to.be.null
       expect(res).to.have.status(200)
@@ -76,7 +76,7 @@ describe('models', function () {
       chai.request(server)
       .get('/api/models/' + response.body.body[0].id)
       .end(function (err, res) {
-        const body = res.body.body[0]
+        var body = res.body.body[0]
 
         expect(err).to.be.null
         expect(res).to.have.status(200)

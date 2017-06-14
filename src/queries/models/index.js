@@ -1,7 +1,7 @@
-const queries = {}
+var queries = {}
 
 export default function getAllRoutes (options) {
-  const {db, logger} = options
+  var {db, logger} = options
 
   queries.getAllModels = (req, res, next) => {
     db.query('SELECT * FROM models', (err, results, fields) => {
@@ -16,7 +16,7 @@ export default function getAllRoutes (options) {
   }
 
   queries.createModel = (req, res, next) => {
-    const post = {name: req.body.name, attribute: req.body.attribute}
+    var post = {name: req.body.name, attribute: req.body.attribute}
 
     db.query('INSERT INTO models SET ?', post, function (err, results, fields) {
       if (err) logger.error(err)
@@ -30,7 +30,7 @@ export default function getAllRoutes (options) {
   }
 
   queries.getSingleModel = (req, res, next) => {
-    const modelId = parseInt(req.params.id)
+    var modelId = parseInt(req.params.id)
 
     db.query('SELECT * FROM models WHERE id = ?', db.escape(modelId), function (err, results, fields) {
       if (err) logger.error(err)
@@ -44,7 +44,7 @@ export default function getAllRoutes (options) {
   }
 
   queries.updateSingleModel = (req, res, next) => {
-    const modelId = parseInt(req.params.id)
+    var modelId = parseInt(req.params.id)
 
     db.query('UPDATE models SET name=?, attribute=? WHERE id = ?', [req.body.name, req.body.attribute, db.escape(modelId)], function (err, results, fields) {
       if (err) logger.error(err)
@@ -58,7 +58,7 @@ export default function getAllRoutes (options) {
   }
 
   queries.removeModel = (req, res, next) => {
-    const modelId = parseInt(req.params.id)
+    var modelId = parseInt(req.params.id)
 
     db.query('DELETE FROM models WHERE id = ?', db.escape(modelId), function (err, results, fields) {
       if (err) logger.error(err)

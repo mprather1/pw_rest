@@ -1,4 +1,4 @@
-const config = {}
+var config = {}
 
 config.mysqlDB = {
   development: {

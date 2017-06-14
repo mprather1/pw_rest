@@ -9,7 +9,7 @@ import config from './_config'
 import pkg from '../package.json'
 import {init as db} from './queries'
 
-const options = {
+var options = {
   app: express(),
   port: process.env.PORT || 8000,
   environment: process.env.NODE_ENV || 'development',
@@ -21,12 +21,12 @@ const options = {
 
 options.db = db(options)
 
-const { app, port, environment, logger, packageVersion, packageName } = options
+var { app, port, environment, logger, packageVersion, packageName } = options
 
 app.use(helmet())
 
-const server = Server(app)
-const router = getRouter(options)
+var server = Server(app)
+var router = getRouter(options)
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
@@ -51,7 +51,7 @@ server.on('error', (err) => {
 
 server.listen(port)
 
-const serverConfig = {
+var serverConfig = {
   server: server,
   options: options
 }
