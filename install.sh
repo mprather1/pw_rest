@@ -7,17 +7,11 @@ fi
 
 echo "Creating file directories..." && \
 mkdir build && \
-mkdir build/static && \
-
-echo "Copying resources..." && \
-cp -rv resources build && \
 
 printf "\nInstalling packages...\n" && \
 npm install && \
 
 printf "\nBuilding in progress...\nPlease wait...\n\n" && \
-webpack --progress --display-reasons --display-modules --display-chunks && \
-printf "\n " && \
 npm run -s build && \
 
 printf "All done...\n"
