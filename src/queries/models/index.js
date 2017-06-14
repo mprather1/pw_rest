@@ -16,6 +16,10 @@ export default function getAllRoutes (options) {
   }
 
   queries.createModel = (req, res, next) => {
+    if (!req.body.name || !req.body.attribute) {
+      return next(new Error('Invalid input data'))
+    }
+
     var post = {name: req.body.name, attribute: req.body.attribute}
 
     db.query('INSERT INTO models SET ?', post, (err, results, fields) => {
@@ -50,6 +54,10 @@ export default function getAllRoutes (options) {
   }
 
   queries.updateSingleModel = (req, res, next) => {
+    if (!req.body.name || !req.body.attribute) {
+      return next(new Error('Invalid input data'))
+    }
+
     var modelId = parseInt(req.params.id)
 
     db.query('UPDATE models SET name=?, attribute=? WHERE id = ?', [req.body.name, req.body.attribute, db.escape(modelId)], (err, results, fields) => {
