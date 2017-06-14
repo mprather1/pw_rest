@@ -21,12 +21,22 @@
 
     ./install
     
-    # note production environment does not exist yet
+    # note production environment does not exist yet - setting NODE_ENV to production will cause errors
+    
+    # to start server
     
     NODE_ENV=development PORT=<port> TZ='America/Chicago' DB_USER=<user> DB_HOST=<host> DB_NAME=<database> DB_PASSWORD=<password> npm start
     
-    # use curl, httpie or postman - examples here are given using httpie
+    # to run tests
     
+    PORT=<port> TZ='America/Chicago' DB_USER=<user> DB_HOST=<host> DB_NAME=<database> DB_PASSWORD=<password> npm test
+    
+    # note TZ does not always work but it is there anyway
+    
+#### Routes
+
+Note: use curl, httpie or postman - examples here are given using httpie
+
 #### GET /api/models
 
     http http://<host>:<port>/api/models
