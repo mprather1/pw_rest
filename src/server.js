@@ -21,7 +21,7 @@ const options = {
 
 options.db = db(options)
 
-const { app, port, logger, packageVersion, packageName } = options
+const { app, port, environment, logger, packageVersion, packageName } = options
 
 app.use(helmet())
 
@@ -33,11 +33,15 @@ app.use(bodyParser.json())
 app.use('/api', router)
 
 server.on('listening', () => {
-  logger.info(`${chalk.bgBlack.cyan(packageName)} ver.${chalk.bgBlack.green(packageVersion)} istening on port ${chalk.bgBlack.yellow(port)}...`)
+  if (environment !== 'test') {
+    logger.info(`${chalk.bgBlack.cyan(packageName)} ver.${chalk.bgBlack.green(packageVersion)} istening on port ${chalk.bgBlack.yellow(port)}...`)
+  }
 })
 
 server.on('request', (req, res) => {
-  logger.info(req.method, req.url)
+  if (environment !== 'test') {
+    logger.info(req.method, req.url)
+  }
 })
 
 server.on('error', (err) => {
@@ -46,4 +50,9 @@ server.on('error', (err) => {
 
 server.listen(port)
 
-export default server
+const serverConfig = {
+  server: server,
+  options: options
+}
+
+export default serverConfig
