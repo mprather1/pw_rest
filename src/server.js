@@ -50,6 +50,10 @@ server.on('request', (req, res) => {
   }
 })
 
+server.on('error', function (err) {
+  logger.info(chalk.bgRed.white('Server -', err))
+})
+
 server.listen(port)
 
 var serverConfig = {
