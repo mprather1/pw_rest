@@ -40,7 +40,7 @@ app.use('/api', router)
 
 server.on('listening', function () {
   if (environment !== 'test') {
-    logger.info(chalk.bgBlack.cyan(packageName) + ' ver.' + chalk.bgBlack.green(packageVersion) + 'listening on port ' + chalk.bgBlack.yellow(port) + '...')
+    logger.info(`${chalk.bgBlack.cyan(packageName)} ver.${chalk.bgBlack.green(packageVersion)} istening on port ${chalk.bgBlack.yellow(port)}...`)
   }
 })
 
