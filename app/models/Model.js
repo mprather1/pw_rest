@@ -3,9 +3,7 @@ import moment from 'moment'
 
 const Model = Backbone.Model.extend({
   initialize: function (options) {
-    if (this.get('url')) {
-      this.urlRoot = 'http://shintech.ninja:8000/api/models'
-    }
+    this.urlRoot = 'http://' + (window.location.hostname) + ':8000/api/models'
   },
 
   validation: {

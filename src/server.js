@@ -5,6 +5,7 @@ import {Server} from 'http'
 import helmet from 'helmet'
 import winston from 'winston-color'
 import chalk from 'chalk'
+import favicon from 'serve-favicon'
 import getRouter from './routes'
 import config from './_config'
 import pkg from '../package.json'
@@ -31,6 +32,7 @@ app.use(helmet())
 const server = Server(app)
 const router = getRouter(options)
 
+app.use(favicon(path.join(__dirname, 'resources', 'images', 'favicon.png')))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use('/css', express.static(path.join(_parentDir, 'node_modules', 'bootstrap', 'dist', 'css')))

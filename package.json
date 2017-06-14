@@ -1,6 +1,6 @@
 {
   "name": "pw_rest",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "description": "Purple Wave Rest API",
   "main": "build/server.js",
   "repository": "https://github.com/mprather1/pw_rest",
@@ -8,8 +8,8 @@
   "license": "MIT",
   "scripts": {
     "start": "node build/server.js",
-    "dev": "NODE_ENV=development PORT=8000 TZ='America/Chicago' nodemon build/server.js",
-    "test": "PORT=8001 TZ='America/Chicago' NODE_ENV=test mocha build/test -t 10000",
+    "dev": "NODE_ENV=development PORT=8000 TZ='America/Chicago' DB_USER=mike DB_HOST=localhost DB_NAME=development DB_PASSWORD=password nodemon build/server.js",
+    "test": "PORT=8001 TZ='America/Chicago' DB_USER=mike DB_HOST=localhost DB_NAME=development DB_PASSWORD=password NODE_ENV=test mocha build/test -t 10000",
     "build": "babel -d build src",
     "watch": "babel --watch -d build src | ts '[%Y-%m-%d %H:%M:%S]'",
     "webpack": "NODE_ENV=development webpack --progress --watch"
