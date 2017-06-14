@@ -4,8 +4,8 @@ export default function getAllRoutes (options) {
   var db = options.db
   var logger = options.logger
 
-  queries.getAllModels = function (req, res, next) {
-    db.query('SELECT * FROM models', function (err, results, fields) {
+  queries.getAllModels = (req, res, next) => {
+    db.query('SELECT * FROM models', (err, results, fields) => {
       if (err) logger.error(err)
 
       res.status(200)
@@ -16,10 +16,10 @@ export default function getAllRoutes (options) {
     })
   }
 
-  queries.createModel = function (req, res, next) {
+  queries.createModel = (req, res, next) => {
     var post = {name: req.body.name, attribute: req.body.attribute}
 
-    db.query('INSERT INTO models SET ?', post, function (err, results, fields) {
+    db.query('INSERT INTO models SET ?', post, (err, results, fields) => {
       if (err) logger.error(err)
 
       res.status(200)
@@ -30,10 +30,10 @@ export default function getAllRoutes (options) {
     })
   }
 
-  queries.getSingleModel = function (req, res, next) {
+  queries.getSingleModel = (req, res, next) => {
     var modelId = parseInt(req.params.id)
 
-    db.query('SELECT * FROM models WHERE id = ?', db.escape(modelId), function (err, results, fields) {
+    db.query('SELECT * FROM models WHERE id = ?', db.escape(modelId), (err, results, fields) => {
       if (err) logger.error(err)
 
       res.status(200)
@@ -44,10 +44,10 @@ export default function getAllRoutes (options) {
     })
   }
 
-  queries.updateSingleModel = function (req, res, next) {
+  queries.updateSingleModel = (req, res, next) => {
     var modelId = parseInt(req.params.id)
 
-    db.query('UPDATE models SET name=?, attribute=? WHERE id = ?', [req.body.name, req.body.attribute, db.escape(modelId)], function (err, results, fields) {
+    db.query('UPDATE models SET name=?, attribute=? WHERE id = ?', [req.body.name, req.body.attribute, db.escape(modelId)], (err, results, fields) => {
       if (err) logger.error(err)
 
       res.status(200)
@@ -58,10 +58,10 @@ export default function getAllRoutes (options) {
     })
   }
 
-  queries.removeModel = function (req, res, next) {
+  queries.removeModel = (req, res, next) => {
     var modelId = parseInt(req.params.id)
 
-    db.query('DELETE FROM models WHERE id = ?', db.escape(modelId), function (err, results, fields) {
+    db.query('DELETE FROM models WHERE id = ?', db.escape(modelId), (err, results, fields) => {
       if (err) logger.error(err)
 
       res.status(200)
