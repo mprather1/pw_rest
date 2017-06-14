@@ -2,13 +2,11 @@ import mysql from 'mysql'
 import chalk from 'chalk'
 
 export default function initDB (options) {
-  var environment = options.environment
-  var logger = options.logger
-  var config = options.config
+  const { environment, logger, config } = options
 
-  var connection = config.mysqlDB[environment]
+  const connection = config.mysqlDB[environment]
 
-  var conn = mysql.createConnection(connection)
+  const conn = mysql.createConnection(connection)
 
   conn.connect((err) => {
     if (err) throw err

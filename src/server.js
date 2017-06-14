@@ -9,29 +9,24 @@ import config from './_config'
 import pkg from '../package.json'
 import {init} from './queries'
 
-var app = express()
-var port = process.env.PORT || 8000
-var environment = process.env.NODE_ENV || 'development'
-var logger = winston
-var packageName = pkg.name
-var packageVersion = pkg.version
-
-var options = {
-  app: app,
-  port: port,
-  environment: environment,
-  logger: logger,
+const options = {
+  app: express(),
+  port: process.env['PORT'] || 8000,
+  environment: process.env['NODE_ENV'] || 'development',
+  logger: winston,
   config: config,
-  packageName: packageName,
-  packageVersion: packageVersion
+  packageName: pkg.name,
+  packageVersion: pkg.version
 }
 
 options.db = init(options)
 
+const { app, port, environment, logger, packageName, packageVersion } = options
+
 app.use(helmet())
 
-var server = Server(app)
-var router = getRouter(options)
+const server = Server(app)
+const router = getRouter(options)
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())

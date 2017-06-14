@@ -1,7 +1,7 @@
-var queries = {}
+const queries = {}
 
 export default function getAllRoutes (options) {
-  var db = options.db
+  const { db } = options
 
   queries.getAllModels = (req, res, next) => {
     db.query('SELECT * FROM models', (err, results, fields) => {
