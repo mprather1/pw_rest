@@ -13,7 +13,7 @@ export default function initDB (options) {
   conn.connect(function (err) {
     if (err) throw err
     if (environment !== 'test') {
-      logger.info('Connected to database ' + chalk.bgBlack.green(conn.config.database) + '...')
+      logger.info(`Connected to database ${chalk.bgBlack.green(conn.config.database)}...`)
     }
   })
 
