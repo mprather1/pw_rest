@@ -2,7 +2,9 @@ import mysql from 'mysql'
 import chalk from 'chalk'
 
 export default function initDB (options) {
-  var { environment, logger, config } = options
+  var environment = options.environment
+  var logger = options.logger
+  var config = options.config
 
   var connection = config.mysqlDB[environment]
 
