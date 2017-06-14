@@ -1,6 +1,6 @@
 {
   "name": "pw_rest",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Purple Wave Rest API",
   "main": "build/server.js",
   "repository": "https://github.com/mprather1/pw_rest",

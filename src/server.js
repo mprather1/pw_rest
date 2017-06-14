@@ -38,19 +38,19 @@ app.use(bodyParser.json())
 
 app.use('/api', router)
 
-server.on('listening', () => {
+server.on('listening', function () {
   if (environment !== 'test') {
     logger.info(`${chalk.bgBlack.cyan(packageName)} ver.${chalk.bgBlack.green(packageVersion)} istening on port ${chalk.bgBlack.yellow(port)}...`)
   }
 })
 
-server.on('request', (req, res) => {
+server.on('request', function (req, res) {
   if (environment !== 'test') {
     logger.info(req.method, req.url)
   }
 })
 
-server.on('error', (err) => {
+server.on('error', function (err) {
   logger.error(err)
 })
 
