@@ -72,7 +72,6 @@ describe('models', function () {
       expect(response).to.have.status(200)
       expect(response).to.be.json
       expect(response.body).to.have.status('success')
-
       chai.request(server)
       .get('/api/models/' + response.body.body[0].id)
       .end(function (err, res) {

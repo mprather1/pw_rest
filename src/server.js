@@ -50,10 +50,6 @@ server.on('request', (req, res) => {
   }
 })
 
-server.on('error', (err) => {
-  logger.error(err)
-})
-
 server.listen(port)
 
 var serverConfig = {
