@@ -7,21 +7,26 @@ import chalk from 'chalk'
 import getRouter from './routes'
 import config from './_config'
 import pkg from '../package.json'
-import {init as db} from './queries'
+import {init} from './queries'
+
+var app = express()
+var port = process.env.PORT || 8000
+var environment = process.env.NODE_ENV || 'development'
+var logger = winston
+var packageName = pkg.name
+var packageVersion = pkg.version
 
 var options = {
-  app: express(),
-  port: process.env.PORT || 8000,
-  environment: process.env.NODE_ENV || 'development',
-  logger: winston,
+  app: app,
+  port: port,
+  environment: environment,
+  logger: logger,
   config: config,
-  packageName: pkg.name,
-  packageVersion: pkg.version
+  packageName: packageName,
+  packageVersion: packageVersion
 }
 
-options.db = db(options)
-
-var { app, port, environment, logger, packageVersion, packageName } = options
+options.db = init(options)
 
 app.use(helmet())
 

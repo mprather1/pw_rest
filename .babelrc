@@ -4,5 +4,9 @@
     ["latest", {
       es2015: false
     }]
+  ],
+  "plugins": [
+    "transform-es2015-template-literals",
+    "transform-es2015-arrow-functions"
   ]
 }
