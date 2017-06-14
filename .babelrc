@@ -2,11 +2,7 @@
   "presets": [
     "es2015-node6",
     ["latest", {
-      es2015: false
+      es2015: true
     }]
-  ],
-  "plugins": [
-    "transform-es2015-template-literals",
-    "transform-es2015-arrow-functions"
   ]
 }
