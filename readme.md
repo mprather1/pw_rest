@@ -17,10 +17,10 @@
 
     git clone https://github.com/mprather1/pw_rest
     
-### Usage
-
     ./install
     
+### Usage
+
     # note production environment does not exist yet - setting NODE_ENV to production will cause errors
     
     # to start server
