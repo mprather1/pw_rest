@@ -6,28 +6,27 @@ chai.use(chaiHttp)
 
 var server = serverConfig.server
 var db = serverConfig.options.db
-var logger = serverConfig.options.logger
 
 var expect = chai.expect
 
 describe('models', function () {
   before(function (done) {
     db.query('TRUNCATE TABLE models', function (err) {
-      if (err) { logger.error(err) }
+      if (err) return done(err)
       done()
     })
   })
 
   beforeEach(function (done) {
     db.query('INSERT INTO models SET ?', {name: 'test', attribute: 1}, function (err) {
-      if (err) { logger.error(err) }
+      if (err) return done(err)
       done()
     })
   })
 
   afterEach(function (done) {
     db.query('TRUNCATE TABLE models', function (err) {
-      if (err) { logger.error(err) }
+      if (err) return done(err)
       done()
     })
   })
