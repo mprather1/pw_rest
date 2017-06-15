@@ -1,11 +1,10 @@
 import chai from 'chai'
 import chaiHttp from 'chai-http'
-import serverConfig from '../server'
+import options from '../server'
+
+const { db, server } = options
 
 chai.use(chaiHttp)
-
-var server = serverConfig.server
-var db = serverConfig.options.db
 
 var expect = chai.expect
 
