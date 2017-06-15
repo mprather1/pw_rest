@@ -1,11 +1,14 @@
 const queries = {}
 
 export default function getAllRoutes (options) {
-  const { db } = options
+  const { db, logger } = options
 
   queries.getAllModels = (req, res, next) => {
     db.query('SELECT * FROM models', (err, results, fields) => {
-      if (err) return next(err)
+      if (err) {
+        handleError(err, logger)
+        return next(err)
+      }
 
       res.status(200)
       .json({
@@ -23,7 +26,10 @@ export default function getAllRoutes (options) {
     var post = {name: req.body.name, attribute: req.body.attribute}
 
     db.query('INSERT INTO models SET ?', post, (err, results, fields) => {
-      if (err) return next(err)
+      if (err) {
+        handleError(err, logger)
+        return next(err)
+      }
 
       res.status(200)
       .json({
@@ -37,7 +43,10 @@ export default function getAllRoutes (options) {
     var modelId = parseInt(req.params.id)
 
     db.query('SELECT * FROM models WHERE id = ?', db.escape(modelId), (err, results, fields) => {
-      if (err) return next(err)
+      if (err) {
+        handleError(err, logger)
+        return next(err)
+      }
 
       if (results === undefined || results.length === 0) {
         res.statusCode = 404
@@ -61,7 +70,10 @@ export default function getAllRoutes (options) {
     var modelId = parseInt(req.params.id)
 
     db.query('UPDATE models SET name=?, attribute=? WHERE id = ?', [req.body.name, req.body.attribute, db.escape(modelId)], (err, results, fields) => {
-      if (err) return next(err)
+      if (err) {
+        handleError(err, logger)
+        return next(err)
+      }
 
       if (results.affectedRows === 0) {
         res.send('Error updating model')
@@ -80,7 +92,10 @@ export default function getAllRoutes (options) {
     var modelId = parseInt(req.params.id)
 
     db.query('DELETE FROM models WHERE id = ?', db.escape(modelId), (err, results, fields) => {
-      if (err) return next(err)
+      if (err) {
+        handleError(err, logger)
+        return next(err)
+      }
 
       if (results.affectedRows === 0) {
         res.send('Unable to delete model')
@@ -96,4 +111,8 @@ export default function getAllRoutes (options) {
   }
 
   return queries
+}
+
+function handleError (err, logger) {
+  logger.error(err.stack)
 }

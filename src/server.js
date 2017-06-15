@@ -2,26 +2,36 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import {Server} from 'http'
 import helmet from 'helmet'
-import winston from 'winston-color'
+import winston from 'winston'
 import chalk from 'chalk'
 import getRouter from './routes'
 import config from './_config'
 import pkg from '../package.json'
-import {init} from './queries'
+import {init as db} from './queries'
+
+const logger = new (winston.Logger)({
+  transports: [
+    new (winston.transports.Console)({ level: 'info' }),
+    new (winston.transports.File)({
+      filename: 'pw_rest.log',
+      level: 'error'
+    })
+  ]
+})
 
 const options = {
   app: express(),
   port: process.env['PORT'] || 8000,
   environment: process.env['NODE_ENV'] || 'development',
-  logger: winston,
+  logger: logger,
   config: config,
   packageName: pkg.name,
   packageVersion: pkg.version
 }
 
-options.db = init(options)
+options.db = db(options)
 
-const { app, port, environment, logger, packageName, packageVersion } = options
+const { app, port, environment, packageName, packageVersion } = options
 
 app.use(helmet())
 
@@ -48,17 +58,19 @@ server.on('request', (req, res) => {
 })
 
 server.on('error', (err) => {
-  logger.error(chalk.bgRed.white('Server -', err))
+  logger.error(err.stack)
 })
 
 server.listen(port)
 
-var serverConfig = {
+const serverConfig = {
   server: server,
   options: options
 }
 
 function errorHandler (err, req, res, next) {
+  logger.error(err.stack)
+
   if (res.headersSent) {
     return next(err)
   }

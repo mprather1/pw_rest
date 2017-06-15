@@ -9,7 +9,12 @@ export default function initDB (options) {
   const conn = mysql.createConnection(connection)
 
   conn.connect((err) => {
-    if (err) throw err
+    if (err) {
+      logger.error(err)
+
+      throw err
+    }
+
     if (environment !== 'test') {
       logger.info(`Connected to database ${chalk.bgBlack.green(conn.config.database)}...`)
     }

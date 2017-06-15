@@ -1,6 +1,6 @@
 {
   "name": "pw_rest",
-  "version": "0.2.19",
+  "version": "0.2.20",
   "description": "Purple Wave Rest API",
   "main": "build/server.js",
   "repository": "https://github.com/mprather1/pw_rest",
@@ -20,7 +20,7 @@
     "express": "^4.14.1",
     "helmet": "^3.6.1",
     "mysql": "^2.13.0",
-    "winston-color": "^1.0.0"
+    "winston": "^2.3.1"
   },
   "devDependencies": {
     "babel-cli": "^6.23.0",
