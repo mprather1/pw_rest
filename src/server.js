@@ -43,7 +43,7 @@ server.on('listening', () => {
 
 server.on('request', (req, res) => {
   if (environment !== 'test') {
-    logger.info(req.method, req.url)
+    logger.info(packageName, '-', req.method, req.url)
   }
 })
 
