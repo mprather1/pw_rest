@@ -48,7 +48,7 @@ server.on('request', (req, res) => {
 })
 
 server.on('error', (err) => {
-  logger.info(chalk.bgRed.white('Server -', err))
+  logger.error(chalk.bgRed.white('Server -', err))
 })
 
 server.listen(port)
