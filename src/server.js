@@ -33,6 +33,8 @@ app.use(bodyParser.json())
 
 app.use('/api', router)
 
+app.use(errorHandler)
+
 server.on('listening', () => {
   if (environment !== 'test') {
     logger.info(`${chalk.bgBlack.cyan(packageName)} ver.${chalk.bgBlack.green(packageVersion)} istening on port ${chalk.bgBlack.yellow(port)}...`)
@@ -45,7 +47,7 @@ server.on('request', (req, res) => {
   }
 })
 
-server.on('error', function (err) {
+server.on('error', (err) => {
   logger.info(chalk.bgRed.white('Server -', err))
 })
 
@@ -54,6 +56,15 @@ server.listen(port)
 var serverConfig = {
   server: server,
   options: options
+}
+
+function errorHandler (err, req, res, next) {
+  if (res.headersSent) {
+    return next(err)
+  }
+
+  res.status(500)
+  res.send(err)
 }
 
 export default serverConfig
